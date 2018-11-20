@@ -53,18 +53,30 @@
             </ol>
           </nav>
           <div class="row">
-            <div class="col-lg-4 col-md-4 col-sm-6">
-              <a href="item.html">
-                <img class="img-thumbnail" src="imgs/ps4-thumb.jpg" alt="PS4" width="240" height="240">
-                <p>Play Station 4</p>
-              </a>
-              <div class="item-info">
-                <div class="item-price">$249.99</div>
-                <div class="item-add">
-                  <button class="btn-info">Add to Cart </button>
+            <?php
+            require_once "connection.php";
+            $stmt = $dbh -> prepare("select * from products;");
+            $stmt -> execute();
+            foreach($stmt as $row) {
+              $prod_name = $row["name"];
+              $prod_price = $row["price"];
+              $prod_desc = $row["description"];
+              echo
+              '<div class="col-lg-4 col-md-4 col-sm-6">
+                <a href="item.php">
+                  <img class="img-thumbnail" src="imgs/ps4-thumb.jpg" alt="PS4" width="240" height="240">
+                  <p>' . $prod_name . '</p>
+                </a>
+                <div class="item-info">
+                  <div class="item-price">$' . $prod_price . '</div>
+                  <div class="item-add">
+                    <button class="btn-info">Add to Cart </button>
+                  </div>
                 </div>
-              </div>
-            </div>
+              </div>';
+            }
+            ?>
+
             <div class="col-lg-4 col-md-4 col-sm-6">
               <a href="item.html">
                 <img class="img-thumbnail" src="imgs/xone-thumb.jpg" alt="Xbox-one" width="240" height="240">
